@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Questrial&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+#fs-btn{position:fixed;bottom:16px;right:16px;z-index:9999;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.6);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;backdrop-filter:blur(6px);}
+#fs-btn:hover{background:rgba(255,255,255,0.16);color:white;}
 :root{
   --navy:#0c1118;--navy2:#141d2b;
   --cream:#f0ebe0;--cream-70:rgba(240,235,224,0.70);--cream-40:rgba(240,235,224,0.40);
@@ -1219,6 +1221,27 @@ document.querySelectorAll('.tarot-face').forEach(el => {
 document.querySelectorAll('.ex-card').forEach(el => {
   el.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); toggleCard(el); } });
 });
+</script>
+<button id="fs-btn" title="Повний екран">⛶</button>
+<script>
+  const btn = document.getElementById('fs-btn');
+  btn.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+      btn.textContent = '✕';
+      btn.title = 'Вийти з повного екрану';
+    } else {
+      document.exitFullscreen();
+      btn.textContent = '⛶';
+      btn.title = 'Повний екран';
+    }
+  });
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+      btn.textContent = '⛶';
+      btn.title = 'Повний екран';
+    }
+  });
 </script>
 </body>
 </html>
